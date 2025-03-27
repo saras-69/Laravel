@@ -1,0 +1,1 @@
+<h1>The name of the student is <span style="color:red">{{$name}}</span></h1>
