@@ -7,6 +7,8 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\LoopsController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\itemController;
+use App\Http\Middleware\TestMiddleware1;
+use App\Http\Middleware\TestMiddleware2;
 
 
 Route::get('/', function () { 
@@ -226,3 +228,13 @@ Route::controller(itemController::class)->group(function(){
     Route::get('pending','pending');
     Route::get('delivered','delivered');
 });
+
+//middleware
+
+Route::get('testingmiddle',function(){
+    return "we are just testing the middlewre functinallity ";
+})->middleware([TestMiddleware1::class,TestMiddleware1::class]);
+
+Route::get('testingmiddle1',function(){
+    return "we are just testing the middlewre functinallity ";
+})->middleware(['Test1','Test2']);
