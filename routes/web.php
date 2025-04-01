@@ -6,6 +6,8 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\LoopsController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\itemController;
+
 
 Route::get('/', function () { 
     return view('welcome');
@@ -188,3 +190,10 @@ Route::get('someredirect2/{id}', function ($id) {
     return redirect()->route('si',['id'=>$id]);
     
 });
+Route::get('fetchitem/{itemname}',[itemController::class,'dispalyitem']);
+Route::get('contredirect/{itemname}',function(){
+    return redirect()->action([itemController::class,'dispalyitem'],['itemname'=>$itemname]);
+});
+
+//Route prefix
+Route::
