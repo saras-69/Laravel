@@ -196,4 +196,33 @@ Route::get('contredirect/{itemname}',function(){
 });
 
 //Route prefix
-Route::
+Route::prefix('chillandgrill')->group(function(){
+    Route::get('home1',function(){
+        return "This is home page ";
+    });
+    Route::get('login1',function(){
+        return "This is LoginPAge";
+    });
+    Route::get('registration1',function(){
+        return "This is REgistretion";
+    });
+});
+
+// Name prefix
+Route::name('admin')->group(function(){
+    Route::get('/login2',function(){
+        return "Some Login page";
+    })->name('log2');
+    Route::get('/register2',function(){
+        return "Some Registretin ";
+    })->name('reg2');
+});
+Route::get('newredirect', function(){
+    return redirect()->route('admin.log2');
+});
+
+//Controler routing
+Route::controller(itemController::class)->group(function(){
+    Route::get('pending','pending');
+    Route::get('delivered','delivered');
+});
