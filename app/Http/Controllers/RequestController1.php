@@ -14,6 +14,6 @@ class RequestController1 extends Controller
         $name=$request->input('name');
         $email=$request->input('email');
         $password=$request->input('password');
-        echo "The namme $name<br> The emain is $email";
+        echo "The namme $name<br> The email is $email";
     }
 }

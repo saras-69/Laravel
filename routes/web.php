@@ -11,6 +11,7 @@ use App\Http\Middleware\TestMiddleware1;
 use App\Http\Middleware\TestMiddleware2;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\RequestController1;
+use App\Http\Controllers\CalculatorController;
 
 
 Route::get('/', function () { 
@@ -269,4 +270,8 @@ Route::get('req',[RequestController::class,'index']);
 
 Route::get('displayform', [RequestController1::class,'displayform']);
 
-Route::post('submitform', [RequestController1::class,'submitform']);
+Route::post('submitform', [RequestController1::class,'index']);
+
+
+Route::get('calculator', [CalculatorController::class, 'index']);
+Route::post('calculate', [CalculatorController::class, 'calculate']);
