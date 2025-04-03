@@ -17,6 +17,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'Test1'=>TestMiddleware1::class,
             'Test2'=>TestMiddleware2::class,
         ]);
+
+        $middleware->group('newmidgroup',[
+            'Test1'=>TestMiddleware1::class,
+            'Test2'=>TestMiddleware2::class,]);
         //
     })
     ->withExceptions(function (Exceptions $exceptions) {

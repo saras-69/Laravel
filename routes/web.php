@@ -9,6 +9,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\itemController;
 use App\Http\Middleware\TestMiddleware1;
 use App\Http\Middleware\TestMiddleware2;
+use App\Http\Controllers\RequestController;
 
 
 Route::get('/', function () { 
@@ -238,3 +239,28 @@ Route::get('testingmiddle',function(){
 Route::get('testingmiddle1',function(){
     return "we are just testing the middlewre functinallity ";
 })->middleware(['Test1','Test2']);
+
+Route::middleware(['Test1', 'Test2'])->group(function () {
+    Route::get('/login3',function(){
+        return "This is LoginPAge";
+    });
+    Route::get('/registration3',function(){
+        return "This is REgister";
+    });
+});
+
+Route::middleware('newmidgroup')->group(function () {
+    Route::get('/login4',function(){
+        return "This is LoginPAge";
+    });
+    Route::get('/register4',function(){
+        return "This is  REgister LoginPAge";
+    });
+    Route::get('/home4',function(){
+        return "This is Home LoginPAge";
+    })->withoutmiddleware('Test1');
+    
+});
+
+//Workng with request
+Route::get('req',[RequestController::class,'index']);
