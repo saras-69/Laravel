@@ -10,6 +10,7 @@ use App\Http\Controllers\itemController;
 use App\Http\Middleware\TestMiddleware1;
 use App\Http\Middleware\TestMiddleware2;
 use App\Http\Controllers\RequestController;
+use App\Http\Controllers\RequestController1;
 
 
 Route::get('/', function () { 
@@ -264,3 +265,8 @@ Route::middleware('newmidgroup')->group(function () {
 
 //Workng with request
 Route::get('req',[RequestController::class,'index']);
+
+
+Route::get('displayform', [RequestController1::class,'displayform']);
+
+Route::post('submitform', [RequestController1::class,'submitform']);
