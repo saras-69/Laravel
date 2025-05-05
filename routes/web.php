@@ -13,6 +13,7 @@ use App\Http\Controllers\RequestController;
 use App\Http\Controllers\RequestController1;
 use App\Http\Controllers\CalculatorController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StudentController1;
 
 
 Route::get('/', function () { 
@@ -314,3 +315,8 @@ Route::get('course/{id?}', function ($id = null) {
     // Default course or list of courses
     return view('course');
 });
+
+
+Route::get('/students', [StudentController1::class, 'index'])->name('students.index');
+Route::get('/students/create', [StudentController1::class, 'create'])->name('students.create');
+Route::post('/students', [StudentController1::class, 'store'])->name('students.store');
