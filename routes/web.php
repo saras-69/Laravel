@@ -283,3 +283,34 @@ Route::resource('products', ProductController::class);
 Route::get('/cookie', function () {
     return response("Setting cookie")->cookie('user', 'Harshit', 60);
 });
+
+
+
+// Add to routes/web.php
+Route::get('course/{id?}', function ($id = null) {
+    // This would normally come from a database
+    $courses = [
+        1 => [
+            'title' => 'Introduction to Laravel',
+            'description' => 'Learn the basics of Laravel framework and build your first web application.',
+            'modules' => ['Laravel Installation', 'Routing', 'Controllers', 'Views and Blade', 'Database and Eloquent']
+        ],
+        2 => [
+            'title' => 'Advanced PHP Programming',
+            'description' => 'Take your PHP skills to the next level with advanced concepts and techniques.',
+            'modules' => ['Object-Oriented PHP', 'Design Patterns', 'Testing', 'Performance Optimization']
+        ]
+    ];
+    
+    // If ID is provided and course exists, display that course
+    if ($id !== null && isset($courses[$id])) {
+        return view('course', [
+            'course_title' => $courses[$id]['title'],
+            'course_description' => $courses[$id]['description'],
+            'modules' => $courses[$id]['modules']
+        ]);
+    }
+    
+    // Default course or list of courses
+    return view('course');
+});

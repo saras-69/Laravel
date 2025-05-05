@@ -1,83 +1,85 @@
+<!-- filepath: resources/views/layouts/layout.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('title')</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>E-Learning Platform - @yield('title')</title>
     <style>
-        html, body {
-            background-color: #fff;
-            color: black;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 200;
-            height: 100vh;
+        body {
+            font-family: Arial, sans-serif;
             margin: 0;
+            padding: 0;
+            display: grid;
+            grid-template-areas:
+                "header header"
+                "sidebar content"
+                "footer footer";
+            grid-template-columns: 250px 1fr;
+            grid-template-rows: auto 1fr auto;
+            min-height: 100vh;
         }
-
-        .full-height {
-            height: 100%;
-        }
-
-        .flex-center {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-
-        .top-right {
-            position: absolute;
-            right: 10px;
-            top: 18px;
-        }
-
-        .content {
+        header {
+            grid-area: header;
+            background-color: #3498db;
+            color: white;
+            padding: 1rem;
             text-align: center;
         }
-
-        .title {
-            font-size: 84px;
+        .sidebar {
+            grid-area: sidebar;
+            background-color: #f5f5f5;
+            padding: 1rem;
+            border-right: 1px solid #ddd;
         }
-
-        .links > a {
-            color: #636b6f;
-            padding: 0 25px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: .1rem;
+        .content {
+            grid-area: content;
+            padding: 1rem;
+        }
+        footer {
+            grid-area: footer;
+            background-color: #34495e;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            margin-bottom: 10px;
+        }
+        nav ul li a {
             text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .m-b-md {
-            margin-bottom: 30px;
+            color: #333;
         }
     </style>
 </head>
-<body style="background-color: beige">
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">Laravel</a>
-          </div>
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="home">Home</a></li>
-            <li><a href="products">Products</a></li>
-            <li><a href="about">About Us</a></li>
-            <li><a href="contact">Contact Us</a></li>
-            
-          </ul>
-        </div>
-      </nav>
-      <div style="background-color: beige">
+<body>
+    <header>
+        <h1>E-Learning Platform</h1>
+    </header>
+
+    <div class="sidebar">
+        <h3>Navigation</h3>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Courses</a></li>
+                <li><a href="#">My Learning</a></li>
+                <li><a href="#">Account</a></li>
+                <li><a href="#">Support</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="content">
         @yield('content')
-     </div> 
+    </div>
+
+    <footer>
+        <p>&copy; 2025 E-Learning Platform. All rights reserved.</p>
+    </footer>
 </body>
-</html>
+</html> 
