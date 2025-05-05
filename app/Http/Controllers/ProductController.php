@@ -1,31 +1,87 @@
 <?php
 
-namespace App\Models;
+namespace App\Http\Controllers;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Product;
+use Illuminate\Http\Request;
 
-class Product extends Model
+class ProductController extends Controller
 {
-    use HasFactory;
+    /**
+     * Display a listing of the products.
+     */
+    public function index()
+    {
+        $products = Product::latest()->paginate(10);
+        return view('products.index', compact('products'));
+    }
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
+     * Show the form for creating a new product.
      */
-    protected $fillable = [
-        'name',
-        'description',
-        'price',
-    ];
+    public function create()
+    {
+        return view('products.ProductForm');
+    }
 
     /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
+     * Store a newly created product in storage.
      */
-    protected $casts = [
-        'price' => 'decimal:2',
-    ];
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric|min:0',
+        ]);
+
+        Product::create($validated);
+
+        return redirect()->route('products.index')
+            ->with('success', 'Product created successfully!');
+    }
+
+    /**
+     * Display the specified product.
+     */
+    public function show(Product $product)
+    {
+        return view('products.show', compact('product'));
+    }
+
+    /**
+     * Show the form for editing the specified product.
+     */
+    public function edit(Product $product)
+    {
+        return view('products.ProductForm', compact('product'));
+    }
+
+    /**
+     * Update the specified product in storage.
+     */
+    public function update(Request $request, Product $product)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric|min:0',
+        ]);
+
+        $product->update($validated);
+
+        return redirect()->route('products.index')
+            ->with('success', 'Product updated successfully!');
+    }
+
+    /**
+     * Remove the specified product from storage.
+     */
+    public function destroy(Product $product)
+    {
+        $product->delete();
+
+        return redirect()->route('products.index')
+            ->with('success', 'Product deleted successfully!');
+    }
 }

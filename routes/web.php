@@ -279,3 +279,7 @@ Route::post('calculate', [CalculatorController::class, 'calculate']);
 
 
 Route::resource('products', ProductController::class);
+
+Route::get('/cookie', function () {
+    return response("Setting cookie")->cookie('user', 'Harshit', 60);
+});
